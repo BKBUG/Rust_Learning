@@ -21,5 +21,5 @@ fn main()
 }
 
 fn plus_one(x:i32) -> i32 { //parameter type i32, return type i32
-	x + 1
+	x + 1;// if add a semicolon, the "x+1 convert into a statement not a expression, then run the code will get error"
 }
