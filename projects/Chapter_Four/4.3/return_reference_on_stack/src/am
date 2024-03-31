@@ -1,0 +1,5 @@
+fn return_a_string() -> &String
+{
+	let s = String::from("Hello world");
+	&s; //note: s a allocate in a stack, and the String:from("Hello world") is allocate in heap
+}
