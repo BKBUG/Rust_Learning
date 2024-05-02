@@ -29,6 +29,7 @@ fn main()
 }
 */
 
+/*
 #[derive(Copy,Clone)]
 struct Rectangle {
     width: u32,
@@ -49,4 +50,37 @@ impl Rectangle {
         *self = self.max(other);//that self.max(other) desugars to Rectangle::max(*self, other)
         //The dereference *self does not require ownership over *self if Rectangle is copyable
     }
+}*/
+
+
+struct Rectangle {
+    width: u32,
+    height: u32,
+    name: String,
+}
+
+impl Rectangle {
+    fn set_to_max(&mut self, other: Self) {
+        let max = self.max(other);
+        drop(*self);//because max signature is max(self, other:Self)
+        //self moved to self that is max parameter
+
+        *self = max;//When we overwrite *self, Rust will implicitly drop the data previously in *self
+    }
+}
+
+fn main()
+{
+    let mut r1 = Rectangle {
+        width: 9,
+        height: 9,
+        name: String::from("r1") //the data located heap
+    };
+
+    let r2 = Rectangle {
+        width: 16,
+        height: 16,
+        name: String::from("r2")
+    };
+    r1.set_to_max(r2);
 }
