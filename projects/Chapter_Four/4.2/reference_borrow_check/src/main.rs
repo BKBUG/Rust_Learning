@@ -20,11 +20,15 @@ fn main()
 fn main()
 {
 
-	let mut v: Vec<i32> = vec![1, 2, 3];
+	let mut v: Vec<i32> = vec![1, 2, 3]; //because explict annotated "let mut"
+	//so v get those permission that OWR
 
-	let num: &i32 = &v[2];
-
-	println!("Third element is {}", *num);
+	let num: &i32 = &v[2]; //note:in this line, v lost the W and O permission temporary
+	//and num get the R and O permission temporary, *num get the R permission
+	println!("Third element is {}", *num); 
+	//After this line, then num is no longer in use, so v is longer borrowed,
+	//therefore: v regain its WO permission
+	//num and *num have lost all of their permission
 	println!("Again, the third element is {}", *num);
 
 	v.push(4);
@@ -36,5 +40,16 @@ fn main()
 {
 	let mut v:Vec<i32> = vec![1, 2, 3];
 	let num : &i32 = &v[2]; //v will be referenced , so v lost the w and o permission
+	println!("Third element is {}", *num);
+}
+
+//version: complier error
+fn main() 
+{
+	let mut v: Vec<i32> = vec![1, 2, 3];
+	let num: &i32 = &v[2];
+
+	v.push(4); //v.push expect the W permission, but v borrowed, so it lost the W permission, so it error
+	//NOTE: Rust disallow the both alias and mutated exist in same time
 	println!("Third element is {}", *num);
 }

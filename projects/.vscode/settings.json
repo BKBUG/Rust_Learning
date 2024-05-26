@@ -1,5 +1,6 @@
 {
     "rust-analyzer.linkedProjects": [
         "/home/chu/Rust_Learning/projects/Chapter_Five/5.3/move_with_self/Cargo.toml"
-    ]
+    ],
+    "cmake.configureOnOpen": false
 }

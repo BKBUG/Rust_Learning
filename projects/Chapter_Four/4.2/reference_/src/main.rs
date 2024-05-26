@@ -90,3 +90,10 @@ assert_eq!(s_len1, s_len2);
 }
 */
 
+
+//In addition:
+//let reference: type = variable just need the variable has R permission
+//so a refernece can borrowed to a another refernece, and a variable can have 
+// multiple reference by itselfe borrowed (above must in a situation that all reference are
+//not a mut reference, when a varibale borrowed(a immutable refernece), it just lost O permission, it still has the R permission)
+//but is variable borrowed by a mut refernece, it lost all of permission, untill the reference out of lifetime
